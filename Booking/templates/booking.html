@@ -1,0 +1,15 @@
+<!-- Corrected Template without duplication -->
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Owner</th>
+        
+    </tr>
+    {% for car_list in data %}
+    <tr>
+        <td>{{ car_list.model }}</td>
+        <td>{{ car_list.owner.name }}</td>
+        
+    </tr>
+    {% endfor %}
+</table>
