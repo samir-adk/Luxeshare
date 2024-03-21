@@ -1,0 +1,15 @@
+<!-- Corrected Template without duplication -->
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Owner</th>
+        <th>Action</th>
+    </tr>
+    {% for car_list in data %}
+    <tr>
+        <td>{{ car_list.model }}</td>
+        <td>{{ car_list.owner.name }}</td>
+        <td><a href="{% url 'Booking:book_car' car_list.id %}">book</a></td>
+    </tr>
+    {% endfor %}
+</table>

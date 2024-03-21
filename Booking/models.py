@@ -4,7 +4,7 @@ from Car.models import Vehicle
 # Create your models here.
 
 
-class Booking(BaseModel):
+class BookingCar(BaseModel):
     user = models.ForeignKey(User, related_name='bookings', on_delete=models.CASCADE)
     vehicle = models.ForeignKey(Vehicle, related_name='bookings', on_delete=models.CASCADE)
     start_time = models.DateTimeField()
