@@ -12,7 +12,9 @@ class BookingCar(BaseModel):
     end_time = models.DateTimeField()
     total_cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     booked=models.BooleanField(default=False)
+    cancelled=models.BooleanField(default=False)
     hourly_rate=models.DecimalField(max_digits=10,default=0,decimal_places=2)
+
 
     def save(self, *args, **kwargs):
         self.start_time = datetime.strptime(self.start_time, '%Y-%m-%d %H:%M:%S')

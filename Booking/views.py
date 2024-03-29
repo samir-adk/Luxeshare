@@ -4,6 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from Booking.models import BookingCar
+from django.urls import reverse
+from django.shortcuts import redirect
 # Create your views here.
 
 def book_car(request,id):
@@ -21,7 +23,7 @@ def confirm_booking(request):
         logged_user=data.get('logged_user')
         vechile_id=data.get('vechile_id')
         hourly_rate=data.get('hourly_rate')
-        already_booked=BookingCar.objects.filter(vehicle_id=vechile_id).filter(start_time__gte=start_timestamp,end_time__lte=end_timestamp)
+        already_booked=BookingCar.objects.filter(vehicle_id=vechile_id).filter(start_time__gte=start_timestamp,end_time__lte=end_timestamp,cancelled=False)
         if already_booked.exists():
             return JsonResponse({'success': False})
         else:
@@ -31,4 +33,11 @@ def confirm_booking(request):
         return JsonResponse({'success': True})
 
 
+def view_booking(request):
+    my_booking=BookingCar.objects.filter(user__email=request.user.email,cancelled=False)
+    return render(request,'booking_cart.html',{'data':my_booking})
+
+def remove_booking(request,id):
+    update_id=BookingCar.objects.filter(id=id).update(cancelled=True)
+    return redirect(reverse('Booking:view_booking'))
 

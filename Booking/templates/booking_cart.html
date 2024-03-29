@@ -1,0 +1,8 @@
+{% for booking in data %}
+{{booking.vehicle.model}} <br>
+
+{{booking.hourly_rate}} rate<br>
+
+{{booking.total_cost}} cost
+<a href="{% url 'Booking:remove_booking' booking.id %}">cancel booking</a>
+{% endfor %}
