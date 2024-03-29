@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'Booking',
     'Car',
     'Users',
-    'rest_framework'
+    'rest_framework',
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
