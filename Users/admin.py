@@ -1,4 +1,11 @@
+
+# admin.py
 from django.contrib import admin
-from Users.models import User
-# Register your models here.
-admin.site.register(User)
+from django.contrib.auth.admin import UserAdmin
+from .models import User
+
+class CustomUserAdmin(UserAdmin):
+    list_display = ('phone_number', 'email')  # Customize the columns displayed in the user list
+
+admin.site.register(User, CustomUserAdmin)  # Register your custom user model with the custom admin configuration
+
