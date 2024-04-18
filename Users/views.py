@@ -1,7 +1,12 @@
 from django.shortcuts import render,redirect
 from Users.forms import UserForm,LoginForm
+# CustomPasswordResetForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import PasswordResetView
 # Create your views here.
+
+
+
 def signup(request):
     form=UserForm()
     if request.method=='POST':
@@ -17,21 +22,14 @@ def signup(request):
 def loginz(request):
     form = LoginForm()
     if request.method == 'POST':
-        form_data = LoginForm(request, request.POST)
-        if form_data.is_valid():
-            email = form_data.cleaned_data['username']
-            password = form_data.cleaned_data['password']
+        email=request.POST.get('username')
+        password=request.POST.get('password')
+        if email and password:
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('Car:index')
             else:
-                # If authentication fails using email, try phone number
-                user = authenticate(request, phone_number=email, password=password)
-                if user is not None:
-                    login(request, user)
-                    return redirect('Car:index')
-                else:
                     # Both email and phone number authentication failed
                     return render(request, 'login.html', {'form': form})
         else:
@@ -43,3 +41,6 @@ def loginz(request):
 
 
 
+# class CustomPasswordResetView(PasswordResetView):
+#     form_class = CustomPasswordResetForm
+#     

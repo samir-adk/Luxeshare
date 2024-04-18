@@ -1,6 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include 'partials/header.html' %}
-	
+{% block content %}
 	<body>
 		<!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
@@ -36,6 +36,7 @@
 				                    <li class="scroll"><a href="#new-cars">new cars</a></li>
 				                    <li class="scroll"><a href="#brand">brands</a></li>
 				                    <li class="scroll"><a href="#contact">contact</a></li>
+				                    <li><a href="{% url 'Users:login' %}">login</a></li>
 				                </ul><!--/.nav -->
 				            </div><!-- /.navbar-collapse -->
 				        </div><!--/.container-->
@@ -644,4 +645,4 @@
 		<section id="blog" class="blog"></section><!--/.blog-->
 		<!--blog end -->
 
-		{% include 'partials/footer.html' %}
+	{% endblock %}

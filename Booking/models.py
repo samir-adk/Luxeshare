@@ -1,13 +1,13 @@
 from django.db import models
-from Users.models import User,BaseModel
+from Users.models import CustomUser,BaseModel
 from Car.models import Vehicle
 from datetime import datetime
 # Create your models here.
 
 
 class BookingCar(BaseModel):
-    user = models.ForeignKey(User, related_name='bookings', on_delete=models.CASCADE)
-    vehicle = models.ForeignKey(Vehicle, related_name='bookings', on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, related_name='bookings', on_delete=models.CASCADE)
+    vehicle = models.ForeignKey(Vehicle, related_name='vehicle_booking', on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     total_cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)

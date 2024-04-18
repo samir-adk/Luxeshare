@@ -1,5 +1,5 @@
 from django.db import models
-from Users.models import User,BaseModel
+from Users.models import CustomUser,BaseModel
 # Create your models here.
 
 class CarCategory(BaseModel):
