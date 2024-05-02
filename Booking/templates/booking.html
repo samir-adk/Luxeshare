@@ -2,90 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Date Range Picker Example</title>
+    <title>Book Date</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <style>
+        .card {
+            margin-bottom: 20px;
+        }
+        .image-container {
+            float: right;
+            margin-left: 10px;
+            width: 100px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
 </head>
+
 <body>
-  {% for booking_data in data %}
-{{booking_data.model}} car model <br>
-{{booking_data.hourly_rate}} hourlyrate<br>
-{{booking_data.owner.name}} owner<br>
-{{booking_data.color}} color name
-{{request.user}}
-
-
-<input type="text" name="datetimes" />
+<div class="container">
+    <div class="row">
+         <a href="{% url 'Booking:view_booking' %}" class="btn btn-danger"> view Booking</a>
+        {% for booking_data in data %}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ booking_data.model }}</h5>
+                    <p class="card-text">
+                        Car model: {{ booking_data.model }} <br>
+                        Hourly rate: {{ booking_data.hourly_rate }} <br>
+                        Owner: {{ booking_data.owner.name }} <br>
+                        Color: {{ booking_data.color }} <br>
+                        Logged user: {{ request.user }}
+                    </p>
+                    <div class="image-container">
+                        <img src="{{booking_data.image.url}}" alt="{{ booking_data.model }}" class="img-fluid">
+                    </div>
+                    <input type="text" name="datetimes" class="form-control" />
+                    <button class="btn btn-primary mt-3 book-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</div>
 <script>
-$(function() {
-  $('input[name="datetimes"]').daterangepicker({
-    timePicker: true,
-    startDate: moment().startOf('hour'),
-    endDate: moment().startOf('hour').add(32, 'hour'),
-    locale: {
-      format: 'M/DD hh:mm A'
-    }
-  });
-
-  $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
-    var startTimestamp = picker.startDate.unix(); // Get start date as Unix timestamp
-    var endTimestamp = picker.endDate.unix();     // Get end date as Unix timestamp
-    var timestampDifference = endTimestamp - startTimestamp; // Calculate the difference in seconds
-    var TimeinMinutes = timestampDifference / 3600;
-    var logged_user="{{request.user}}"
-    var owner_name="{{booking_data.owner.name}}"
-    var total_cost = "{{ booking_data.hourly_rate }}" * TimeinMinutes;
-   
-    var confirmation = confirm("Confirm booking?");
-    if (confirmation) {
-        // Prepare data to send to backend
-        var payload = {
-            csrfmiddlewaretoken: "{{ csrf_token }}",
-            start: picker.startDate.format('YYYY-MM-DD HH:mm:ss'),
-            end: picker.endDate.format('YYYY-MM-DD HH:mm:ss'),
-            total_cost: total_cost,
-            owner_name:owner_name,
-            logged_user:logged_user,
-            hourly_rate:"{{booking_data.hourly_rate}}",
-            vechile_id:"{{booking_data.id}}",
-          
-        };
-
-        // Make AJAX request to backend
-        $.ajax({
-            url: '/confirm-booking', // Specify your backend endpoint URL here
-            type: 'POST', // Use POST method to send data
-            contentType: 'application/json', // Specify the content type
-            data: JSON.stringify(payload), // Convert payload to JSON string
-            success: function(response) {
-                if(response.success){
-                console.log('Booking successful:', response);
-                alert(' congratulations!booking is confirmed')
-                var startTimestamp=0
-                // Handle success response from backend
-
+    $(function() {
+        $('.book-btn').click(function() {
+            var card = $(this).closest('.card');
+            var input = card.find('input[name="datetimes"]');
+            input.daterangepicker({
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'M/DD hh:mm A'
                 }
-                else{
-                console.log('Booking successful:', response);
-                alert('Sorry, booking is not available check another date')
+            });
 
+            // Trigger the date range picker calendar when the button is clicked
+            input.data('daterangepicker').show();
+
+            input.on('apply.daterangepicker', function(ev, picker) {
+                var startTimestamp = picker.startDate.unix(); // Get start date as Unix timestamp
+                var endTimestamp = picker.endDate.unix();     // Get end date as Unix timestamp
+                var timestampDifference = endTimestamp - startTimestamp; // Calculate the difference in seconds
+                var TimeinMinutes = timestampDifference / 3600;
+                var logged_user = "{{ request.user }}";
+                var owner_name = "{{ booking_data.owner.name }}";
+                var total_cost = "{{ booking_data.hourly_rate }}" * TimeinMinutes;
+
+                var confirmation = confirm("Confirm booking?");
+                if (confirmation) {
+                    var payload = {
+                        csrfmiddlewaretoken: "{{ csrf_token }}",
+                        start: picker.startDate.format('YYYY-MM-DD HH:mm:ss'),
+                        end: picker.endDate.format('YYYY-MM-DD HH:mm:ss'),
+                        total_cost: total_cost,
+                        owner_name: owner_name,
+                        logged_user: logged_user,
+                        hourly_rate: "{{ booking_data.hourly_rate }}",
+                        vechile_id: "{{ booking_data.id }}",
+                    };
+
+                    $.ajax({
+                        url: '/confirm-booking',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(payload),
+                        success: function(response) {
+                            if (response.success) {
+                                console.log('Booking successful:', response);
+                                alert('Congratulations! Booking is confirmed');
+                                var startTimestamp = 0;
+                            } else {
+                                console.log('Booking successful:', response);
+                                alert('Sorry, booking is not available. Please check another date');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error:', error);
+                            alert('Sorry, booking is not available. Please check another date');
+                        }
+                    });
+                } else {
+                    console.log("Booking canceled");
                 }
-
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                alert('sorry booking is not available check another date')
-                // Handle error response from backend
-            }
+            });
         });
-    } else {
-        console.log("Booking canceled");
-    }
-  });
-});
+    });
 </script>
-{% endfor %}
 </body>
+  {% endfor %}
 </html>

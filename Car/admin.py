@@ -7,7 +7,7 @@ from Car.models import CarCategory,CarCompany,Vehicle,Owner
 # admin.py
 
 from django.contrib import admin
-from .models import CarCategory, CarCompany, Owner, Vehicle, VehicleImage
+from .models import CarCategory, CarCompany, Owner, Vehicle
 
 @admin.register(CarCategory)
 class CarCategoryAdmin(admin.ModelAdmin):
@@ -36,7 +36,4 @@ class VehicleAdmin(admin.ModelAdmin):
     search_fields=['owner__name','model','registration_number']
     date_hierarchy = 'created_at'
 
-@admin.register(VehicleImage)
-class VehicleImageAdmin(admin.ModelAdmin):
-    list_display = ['vehicle', 'image']
-   
+

@@ -1,8 +1,72 @@
-{% for booking in data %}
-{{booking.vehicle.model}} <br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Date</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            margin-bottom: 20px;
+        }
+        .image-container {
+            float: right;
+            margin-left: 10px;
+            width: 100px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
 
-{{booking.hourly_rate}} rate<br>
+<body>
+<div class="container">
+    <div class="row">
+        {% for booking_data in data %}
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ booking_data.vehicle.model }}</h5>
+                    <p class="card-text">
+                        Hourly rate: {{ booking_data.hourly_rate }} <br>
+                        Color: {{ booking_data.vehicle.color }} <br>
+                        booked date:{{booking_data.start_time}}<br>
+                        booking end date:{{booking_data.end_time}}<br>
+                        total cost:{{booking_data.total_cost}}<br>
+                    </p>
+                    <div class="image-container">
+                        <img src="{{booking_data.vehicle.image.url}}" alt="{{ booking_data.model }}" class="img-fluid">
+                    </div>
+                    <button class="btn btn-primary mt-3" data-toggle="modal" data-target="#cancelBookingModal{{ booking_data.id }}">Cancel booking</button>
+                     <a href="{% url 'Car:index' %}" class="btn btn-danger">index</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="cancelBookingModal{{ booking_data.id }}" tabindex="-1" role="dialog" aria-labelledby="cancelBookingModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cancelBookingModalLabel">Cancel Booking</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to cancel this booking?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{% url 'Booking:remove_booking' booking_data.id %}" class="btn btn-danger">Yes, Cancel Booking</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
-{{booking.total_cost}} cost
-<a href="{% url 'Booking:remove_booking' booking.id %}">cancel booking</a>
-{% endfor %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

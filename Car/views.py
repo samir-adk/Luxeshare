@@ -10,4 +10,6 @@ def car_lists(request):
 	return render(request,'car_list.html',{'data':get_data})
 
 def index(request):
-	return render(request,'index.html')
+	featured_cars=Vehicle.objects.all().filter(featured=True)
+	new_cars=Vehicle.objects.all().filter(newest_car=True)
+	return render(request,'index.html',{'featured_cars':featured_cars,'new_cars':new_cars})
