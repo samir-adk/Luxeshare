@@ -7,20 +7,20 @@
 						<div class="col-md-3 col-sm-6">
 							<div class="single-footer-widget">
 								<div class="footer-logo">
-									<a href="index.html">carvilla</a>
+									<a href="index.html">LUXESHARE</a>
 								</div>
 								<p>
-									Ased do eiusm tempor incidi ut labore et dolore magnaian aliqua. Ut enim ad minim veniam.
+									Welcome to Luxeshare, where every journey is an adventure in luxury and comfort.
 								</p>
 								<div class="footer-contact">
-									<p>info@KOIGROUP.com</p>
+									<p>info@luxeshare.com.au</p>
 									<p>+1 (885) 2563154554</p>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-2 col-sm-6">
 							<div class="single-footer-widget">
-								<h2>about devloon</h2>
+								<h2>about LUXESHARE</h2>
 								<ul>
 									<li><a href="#">about us</a></li>
 									<li><a href="#">career</a></li>
@@ -36,21 +36,23 @@
 									<div class="col-md-7 col-xs-6">
 										<ul>
 											<li><a href="#">BMW</a></li>
-											<li><a href="#">lamborghini</a></li>
-											<li><a href="#">camaro</a></li>
-											<li><a href="#">audi</a></li>
-											<li><a href="#">infiniti</a></li>
-											<li><a href="#">nissan</a></li>
+											<li><a href="#">Lamborghini</a></li>
+											<li><a href="#">Camaro</a></li>
+											<li><a href="#">Audi</a></li>
+											<li><a href="#">Infiniti</a></li>
+											<li><a href="#">Nissan</a></li>
+
 										</ul>
 									</div>
 									<div class="col-md-5 col-xs-6">
 										<ul>
-											<li><a href="#">ferrari</a></li>
-											<li><a href="#">porsche</a></li>
-											<li><a href="#">land rover</a></li>
-											<li><a href="#">aston martin</a></li>
-											<li><a href="#">mersedes</a></li>
-											<li><a href="#">opel</a></li>
+											<li><a href="#">Ferrari</a></li>
+											<li><a href="#">Porsche</a></li>
+											<li><a href="#">Land Rover</a></li>
+											<li><a href="#">Aston Martin</a></li>
+											<li><a href="#">Mercedes</a></li>
+											<li><a href="#">Opel</a></li>
+
 										</ul>
 									</div>
 								</div>
@@ -64,14 +66,19 @@
 										Subscribe to get latest news  update and informations
 									</p>
 								</div>
-								<div class="hm-foot-email">
-									<div class="foot-email-box">
-										<input type="text" class="form-control" placeholder="Add Email">
-									</div><!--/.foot-email-box-->
-									<div class="foot-email-subscribe">
-										<span><i class="fa fa-arrow-right"></i></span>
-									</div><!--/.foot-email-icon-->
-								</div><!--/.hm-foot-email-->
+								<form id="newsletter-form" method="post" action="{% url 'AboutUs:contact_us' %}">
+								    {% csrf_token %}
+								    <div class="hm-foot-email">
+								        <div class="foot-email-box">
+								            <input type="email" class="form-control" name="email" id="email" placeholder="Add Email" required>
+								            <input type="text" class="form-control" name="message" id="message" placeholder="Message">
+								        </div><!--/.foot-email-box-->
+								        <button type="submit" class="foot-email-subscribe">
+								            <span><i class="fa fa-arrow-right"></i></span>
+								        </button><!--/.foot-email-icon-->
+								    </div><!--/.hm-foot-email-->
+								</form>
+
 							</div>
 						</div>
 					</div>
@@ -80,7 +87,7 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<p>
-								&copy; copyright.designed and developed by <a href="#">KOI GROUP</a>.
+								&copy; copyright.designed and developed by <a href="#">LUXESHARE</a>.
 							</p><!--/p-->
 						</div>
 						<div class="col-sm-6">

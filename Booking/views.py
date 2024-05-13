@@ -6,13 +6,15 @@ import json
 from Booking.models import BookingCar
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+@login_required
 def book_car(request,id):
     get_by_id=Vehicle.objects.filter(id=id)
     return render(request,'booking.html',{'data':get_by_id})
 
 @csrf_exempt
+@login_required
 def confirm_booking(request):
     if request.method=="POST":
         data=json.loads(request.body)
@@ -32,11 +34,11 @@ def confirm_booking(request):
     else:
         return JsonResponse({'success': True})
 
-
+@login_required
 def view_booking(request):
     my_booking=BookingCar.objects.filter(user__email=request.user.email,cancelled=False)
     return render(request,'booking_cart.html',{'data':my_booking})
-
+@login_required
 def remove_booking(request,id):
     update_id=BookingCar.objects.filter(id=id).update(cancelled=True)
     return redirect(reverse('Booking:view_booking'))

@@ -307,6 +307,7 @@ ul.cart-list > li.total{
 ul.cart-list > li.total > .btn{
     display: inline-block;
     border-bottom: solid 1px #efefef;
+    
 }
 
 ul.cart-list > li .price{

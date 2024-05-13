@@ -4,7 +4,6 @@ from Users.models import BaseModel
 
 class ContactUs(BaseModel):
 	email=models.CharField(max_length=40)
-	phone=models.CharField(max_length=40)
 	message=models.CharField(max_length=200)
 
 	def __str__(self):
