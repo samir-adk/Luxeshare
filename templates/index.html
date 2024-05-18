@@ -69,110 +69,18 @@
 					<div class="col-md-12">
 						<div class="model-search-content">
 							<div class="row">
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>select year</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">year</option><!-- /.option-->
-
-											  	<option value="2018">2018</option><!-- /.option-->
-
-											  	<option value="2017">2017</option><!-- /.option-->
-											  	<option value="2016">2016</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-									<div class="single-model-search">
-										<h2>body style</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">style</option><!-- /.option-->
-
-											  	<option value="sedan">sedan</option><!-- /.option-->
-
-											  	<option value="van">van</option><!-- /.option-->
-											  	<option value="roadster">roadster</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-								</div>
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>select make</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">make</option><!-- /.option-->
-
-											  	<option value="toyota">toyota</option><!-- /.option-->
-
-											  	<option value="holden">holden</option><!-- /.option-->
-											  	<option value="maecedes-benz">maecedes-benz.</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-									<div class="single-model-search">
-										<h2>car condition</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">condition</option><!-- /.option-->
-
-											  	<option value="something">something</option><!-- /.option-->
-
-											  	<option value="something">something</option><!-- /.option-->
-											  	<option value="something">something</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-								</div>
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>select model</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">model</option><!-- /.option-->
-
-											  	<option value="kia-rio">kia-rio</option><!-- /.option-->
-
-											  	<option value="mitsubishi">mitsubishi</option><!-- /.option-->
-											  	<option value="ford">ford</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-									<div class="single-model-search">
-										<h2>select price</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-
-											  	<option value="default">price</option><!-- /.option-->
-
-											  	<option value="$0.00">$0.00</option><!-- /.option-->
-
-											  	<option value="$0.00">$0.00</option><!-- /.option-->
-											  	<option value="$0.00">$0.00</option><!-- /.option-->
-
-											</select><!-- /.select-->
-										</div><!-- /.model-select-icon -->
-									</div>
-								</div>
-								<div class="col-md-2 col-sm-12">
-									<div class="single-model-search text-center">
-										<button class="welcome-btn model-search-btn" onclick="window.location.href='#'">
-											search
-										</button>
-									</div>
-								</div>
-							</div>
+								<div id="logo-container">
+        <div id="car">
+            <div class="car-top"></div>
+            <div class="car-body"></div>
+            <div class="wheel wheel-front"></div>
+            <div class="wheel wheel-back"></div>
+        </div>
+        <div id="text-logo">
+            <span id="main-text">LUXESHARE</span><br>
+            <span id="tagline">LUXESHARE: REDEFINING THE ROAD EXPERIENCE</span>
+        </div>
+    </div>
 						</div>
 					</div>
 				</div>
@@ -251,9 +159,10 @@
 												{{featured_car.about}} 
 											</p>
 											
-											<a href="{% url 'Booking:book_car' new_car.id %}" class="welcome-btn new-cars-btn" style="height: 30px;width: 100px;" >
-										   Book Now
-											</a>
+										
+											   <div class="col-md-6">
+				                            <a href="{% url 'Booking:book_car' new_car.id %}" class="btn btn-danger">Book Now</a>
+				                        </div>
 
 										</div><!--/.new-cars-txt-->	
 									</div><!--/.col-->
@@ -283,11 +192,12 @@
 						<div class="col-lg-3 col-md-4 col-sm-6">
 							
 							<div class="single-featured-cars">
-								<div class="featured-img-box">
-								
-									<div class="featured-cars-img">
+								<div class="featured-img-box" style="height: 200px; margin-bottom: 100px; margin-top: 20px;">
 
-										<img src="{{featured_car.image.url}}" alt="cars">
+								
+									<div class="featured-cars-img" >
+
+										<img src="{{featured_car.image.url}}" alt="cars" style="height: 200px;">
 									</div>
 									
 									<div class="featured-model-info">
@@ -306,9 +216,11 @@
 										{{featured_car.about}} 
 									</p>
 								</div>
-								<a href="{% url 'Booking:book_car' featured_car.id %}" class="welcome-btn new-cars-btn" style="height: 30px;width: 100px;">
-										   Book Now
-											</a>
+								
+								<div class="col-md-6">
+				                 <a href="{% url 'Booking:book_car' featured_car.id %}" class="btn btn-danger">Book Now</a>
+				                 </div>
+
 							</div>
 							
 						</div>
