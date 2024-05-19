@@ -35,8 +35,13 @@
                                     <li class="scroll active"><a href="#featured-cars">All cars</a></li>
                                     
                                     <li class="scroll"><a href="#contact">contact</a></li>
-                                    {% if not user.is_authenticated %}
+                                       {% if not user.is_authenticated %}
                                     <li><a href="{% url 'Users:login' %}">login</a></li>
+
+                                    {% else %}
+                                    <li> <a href="{% url 'Booking:view_booking' %}">View Booking</a></li>
+                                    <li><a href="{% url 'Users:logout' %}">logout</a></li>
+                                    
                                     {% endif %}
                                 </ul><!--/.nav -->
                             </div><!-- /.navbar-collapse -->

@@ -106,10 +106,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 AUTHENTICATION_BACKENDS = [
-    'Users.backends.EmailOrPhoneBackend',
-    'django.contrib.auth.backends.ModelBackend',  # Default authentication backend
+    'django.contrib.auth.backends.ModelBackend',  # Keep the default for superuser login
+    'Users.backends.EmailBackend',  # Replace 'yourapp' with the actual name of your app
 ]
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 

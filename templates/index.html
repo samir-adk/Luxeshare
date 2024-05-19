@@ -31,15 +31,20 @@
 				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
 				                    <li class=" scroll active"><a href="#home">home</a></li>
-				                    <li class="scroll"><a href="#service">service</a></li>
-				                    <li class="scroll"><a href="#featured-cars">featured cars</a></li>
-				                    <li class="scroll"><a href="#new-cars">new cars</a></li>
+				                    <!-- <li class="scroll"><a href="#service">service</a></li> -->
+				                    <li class="scroll"><a href="#featured-cars">featured</a></li>
+				                    <li class="scroll"><a href="#new-cars">New</a></li>
 				                    <li class="scroll"><a href="#brand">brands</a></li>
 				                    <li class="scroll"><a href="#contact">contact</a></li>
 				                    <li><a href="{% url 'Car:car_lists' %}">All cars</a></li>
 				                     <li class="scroll"><a href="#contact">contact</a></li>
                                     {% if not user.is_authenticated %}
                                     <li><a href="{% url 'Users:login' %}">login</a></li>
+
+                                    {% else %}
+                                    <li> <a href="{% url 'Booking:view_booking' %}">View Booking</a></li>
+                                    <li><a href="{% url 'Users:logout' %}">logout</a></li>
+                                    
                                     {% endif %}
 				                </ul><!--/.nav -->
 				            </div><!-- /.navbar-collapse -->

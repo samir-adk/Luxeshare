@@ -128,6 +128,14 @@
                                 </div>
                             </div>
                         {% endfor %}
+                    {% else %}
+                        <div class="col-12 text-center">
+                            <div class="alert alert-warning mt-4">
+                                <h4>No bookings available</h4>
+                                <p>You have no current bookings. Why not browse our available cars and make your next luxury booking today?</p>
+                                <a href="{% url 'Car:car_lists' %}" class="btn btn-primary">Browse Cars</a>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -153,7 +161,7 @@
     <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="{% static 'assets/js/custom.js' %}"></script>
- {% include 'partials/footer.html' %}
+    {% include 'partials/footer.html' %}
 </body>
 
 </html>
