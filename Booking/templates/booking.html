@@ -86,9 +86,11 @@
                         Color: {{ booking_data.color }} <br>
                         Logged user: {{ request.user }}
                     </p>
+                    <br>
                     <div class="image-container">
                         <img src="{{booking_data.image.url}}" alt="{{ booking_data.model }}" class="img-fluid">
                     </div>
+                    <br>
                     <input type="text" name="datetimes" class="form-control" />
                     <br>
                     <div class="row">

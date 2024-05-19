@@ -89,13 +89,13 @@
                                     <!-- Model card -->
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ booking_data.vehicle.model }}</h5>
+                                            <h5 class="card-title">Model:{{ booking_data.vehicle.model }}</h5>
                                             <p class="card-text">
                                                 Hourly rate: {{ booking_data.hourly_rate }} <br>
                                                 Color: {{ booking_data.vehicle.color }} <br>
-                                                booked date:{{booking_data.start_time}}<br>
-                                                booking end date:{{booking_data.end_time}}<br>
-                                                total cost:{{booking_data.total_cost}}<br>
+                                                Booked date:{{booking_data.start_time}}<br>
+                                                Booking end date:{{booking_data.end_time}}<br>
+                                                Total cost:${{booking_data.total_cost}}<br>
                                             </p>
                                             <div class="image-container">
                                                 <img src="{{booking_data.vehicle.image.url}}" alt="{{ booking_data.model }}" class="img-fluid">
